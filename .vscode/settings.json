@@ -1,0 +1,9 @@
+{
+  "svelte.enable-ts-plugin": true,
+  "github.copilot.chat.agent.mcpServers": {
+    "prompt-forge": {
+      "command": "/Users/sebastiansvensson/Documents/claude-agent-mcp/src-tauri/target/release/prompt-forge",
+      "args": ["--mcp"]
+    }
+  }
+}

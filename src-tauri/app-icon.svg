@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1c1a18"/>
+      <stop offset="100%" style="stop-color:#0c0b0a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8c4a0"/>
+      <stop offset="100%" style="stop-color:#d4a574"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5e6d3"/>
+      <stop offset="100%" style="stop-color:#d4a574"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="220" fill="url(#bg)"/>
+
+  <!-- Subtle border -->
+  <rect x="8" y="8" width="1008" height="1008" rx="212" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="4"/>
+
+  <!-- Anvil base -->
+  <path d="M280 680 L744 680 L780 740 L244 740 Z" fill="url(#accent)"/>
+  <rect x="320" y="620" width="384" height="60" rx="8" fill="url(#accent)"/>
+
+  <!-- Anvil body -->
+  <path d="M360 400 L664 400 L700 520 L720 620 L304 620 L324 520 Z" fill="url(#glow)"/>
+
+  <!-- Hammer head -->
+  <rect x="420" y="260" width="184" height="100" rx="16" fill="url(#accent)" transform="rotate(-25, 512, 310)"/>
+
+  <!-- Hammer handle -->
+  <rect x="490" y="320" width="44" height="180" rx="8" fill="#8b7355" transform="rotate(-25, 512, 400)"/>
+
+  <!-- Spark effects -->
+  <circle cx="340" cy="380" r="12" fill="#f5e6d3" opacity="0.9"/>
+  <circle cx="380" cy="340" r="8" fill="#e8c4a0" opacity="0.7"/>
+  <circle cx="680" cy="360" r="10" fill="#f5e6d3" opacity="0.8"/>
+  <circle cx="650" cy="320" r="6" fill="#e8c4a0" opacity="0.6"/>
+  <circle cx="420" cy="300" r="5" fill="#f5e6d3" opacity="0.5"/>
+
+</svg>
