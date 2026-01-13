@@ -698,8 +698,7 @@ export async function installUpdate(): Promise<boolean> {
 				if (progress.event === 'Started') {
 					toasts.info(`Downloading update (${progress.data.contentLength} bytes)`);
 				} else if (progress.event === 'Progress') {
-					const percent = Math.round((progress.data.chunkLength / progress.data.contentLength) * 100);
-					console.log(`Download progress: ${percent}%`);
+					console.log(`Downloaded ${progress.data.chunkLength} bytes`);
 				}
 			});
 
