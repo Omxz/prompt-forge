@@ -80,8 +80,28 @@ Use get_instructions from prompt-forge
 ### Prerequisites
 
 - Node.js 18+
-- Rust 1.70+
-- Platform-specific dependencies (see [Tauri prerequisites](https://tauri.app/v1/guides/getting-started/prerequisites))
+- Rust 1.70+ (see installation below)
+- Platform-specific dependencies:
+  - **Windows**: Visual Studio Build Tools with C++ workload, WebView2
+  - **macOS**: Xcode Command Line Tools
+  - **Linux**: See [Tauri prerequisites](https://tauri.app/v1/guides/getting-started/prerequisites)
+
+#### Windows Setup
+
+If you don't have Rust installed on Windows, run these commands in PowerShell:
+
+```powershell
+# Install Rust
+winget install Rustlang.Rustup
+
+# Install Visual Studio Build Tools (required for compiling)
+winget install Microsoft.VisualStudio.2022.BuildTools --override "--wait --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
+
+# Install WebView2 (usually pre-installed on Windows 10/11)
+winget install Microsoft.EdgeWebView2Runtime
+```
+
+After installation, close and reopen your terminal for the PATH changes to take effect.
 
 ### Setup
 

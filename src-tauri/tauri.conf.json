@@ -44,6 +44,12 @@
   "plugins": {
     "sql": {
       "preload": ["sqlite:promptforge.db"]
+    },
+    "updater": {
+      "endpoints": [
+        "https://github.com/Omxz/prompt-forge/releases/latest/download/latest.json"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDg1MEY1RTZCQ0Y2Rjc3RUYKUldUdmQyL1BhMTRQaFoySS85eFA4UzlTY0RYKy9idmJUeU9GR2hSUWxlSVJGOW1vZUhjeEMzODgK"
     }
   }
 }

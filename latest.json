@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "notes": "Initial release of Prompt Forge - AI Agent Management System",
+  "pub_date": "2025-01-13T12:00:00Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUdmQyL1BhMTRQaFhZZ2o5L056ckRQS3lHOHRDTS8zcThxRUUzcERtOHFpa3Z5ekdkTjhqQkliYTc3SGMya2lkZjJQME5vbStMWjAweHJZZ3ZuU3lYWklDTGk0aTgvaWdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY4MzMxNDg5CWZpbGU6UHJvbXB0IEZvcmdlXzAuMS4wX3g2NC1zZXR1cC5leGUKUTZvUUtFWGFSM0xiOHBaNnd3N0xzMSt2Qk1LN2N5TzR6MnVBLzY4cG96QXVCY3VER0RiUXhPTXQ2dkNFRnhCNDNkYXlXTEpvLzZQYzhhcklHZDBLQVE9PQo=",
+      "url": "https://github.com/Omxz/prompt-forge/releases/download/v0.1.0/Prompt.Forge_0.1.0_x64-setup.exe"
+    },
+    "windows-x86_64-msi": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUdmQyL1BhMTRQaFZpRzZMRkFtenprRExmb0NycjhwV3RNMGQ1bDlLdE5LSDVxRThzTDROWHdQajBtNmdBdSszVmI4RXorZ3VLczdqU2ladk5QYks2NzR4WldCc1hSbVEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY4MzMxNDg5CWZpbGU6UHJvbXB0IEZvcmdlXzAuMS4wX3g2NF9lbi1VUy5tc2kKK3FPM0Z4L09TVW16T3grMjI5WVBkNU5YV0lSZFpGNDdmSnRKRUJsSTFZcEZuc1BOM0NRYVRpUUMycTlZdGdWblltRWpBQUxxenpCYURvRmFmZWFQQmc9PQo=",
+      "url": "https://github.com/Omxz/prompt-forge/releases/download/v0.1.0/Prompt.Forge_0.1.0_x64_en-US.msi"
+    }
+  }
+}

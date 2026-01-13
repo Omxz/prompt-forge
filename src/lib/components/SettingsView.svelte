@@ -8,12 +8,35 @@
 		exportAllData,
 		importAllData,
 		applyTheme,
+		checkForUpdates,
+		installUpdate,
+		updateInfo,
+		checkingForUpdate,
+		installingUpdate,
 		type ExportData
 	} from '$lib/stores';
 	import { toasts } from '$lib/stores/toasts';
 	import type { Theme } from '$lib/types';
 
 	let fileInput: HTMLInputElement;
+
+	async function handleCheckForUpdates() {
+		const info = await checkForUpdates();
+		if (info && !info.available) {
+			toasts.success('You are already on the latest version!');
+		}
+	}
+
+	async function handleInstallUpdate() {
+		if ($updateInfo?.available) {
+			const confirmed = window.confirm(
+				`A new version (${$updateInfo.version}) is available. Do you want to install it now? The app will restart automatically.`
+			);
+			if (confirmed) {
+				await installUpdate();
+			}
+		}
+	}
 
 	async function handleSaveSettings() {
 		await settings.save($settings);
@@ -340,6 +363,64 @@
 			/>
 		</section>
 
+		<!-- Updates -->
+		<section class="settings-section card">
+			<h2 class="section-title">Updates</h2>
+			<p class="section-description">
+				Check for new versions and install updates automatically.
+			</p>
+
+			<div class="update-status">
+				{#if $updateInfo}
+					{#if $updateInfo.available}
+						<div class="update-available">
+							<div class="update-icon">🎉</div>
+							<div class="update-details">
+								<h4>New Version Available!</h4>
+								<p class="update-version">
+									Version {$updateInfo.version} (current: {$updateInfo.currentVersion})
+								</p>
+								{#if $updateInfo.body}
+									<p class="update-notes">{$updateInfo.body}</p>
+								{/if}
+							</div>
+						</div>
+						<button
+							class="btn btn-primary"
+							onclick={handleInstallUpdate}
+							disabled={$installingUpdate}
+						>
+							{#if $installingUpdate}
+								Installing...
+							{:else}
+								Install Update
+							{/if}
+						</button>
+					{:else}
+						<div class="update-current">
+							<div class="update-icon">✓</div>
+							<div class="update-details">
+								<h4>Up to Date</h4>
+								<p class="update-version">You're running version {$updateInfo.currentVersion}</p>
+							</div>
+						</div>
+					{/if}
+				{/if}
+			</div>
+
+			<button
+				class="btn btn-secondary"
+				onclick={handleCheckForUpdates}
+				disabled={$checkingForUpdate}
+			>
+				{#if $checkingForUpdate}
+					Checking...
+				{:else}
+					Check for Updates
+				{/if}
+			</button>
+		</section>
+
 		<!-- About -->
 		<section class="settings-section card">
 			<h2 class="section-title">About</h2>
@@ -407,11 +488,18 @@
 	}
 
 	.settings-sections {
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
 		gap: var(--space-xl);
-		max-width: 720px;
 		padding: var(--space-2xl);
+		max-width: 100%;
+	}
+
+	@media (max-width: 1200px) {
+		.settings-sections {
+			grid-template-columns: 1fr;
+			max-width: 720px;
+		}
 	}
 
 	.settings-section {
@@ -938,7 +1026,6 @@
 		margin-top: var(--space-xl);
 		padding: var(--space-lg) var(--space-2xl);
 		border-top: 1px solid var(--color-border);
-		max-width: calc(720px + var(--space-2xl) * 2);
 	}
 
 	.gradient-text {
@@ -989,5 +1076,60 @@
 	.btn:disabled {
 		opacity: 0.5;
 		cursor: not-allowed;
+	}
+
+	/* Update Section */
+	.update-status {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+	}
+
+	.update-available,
+	.update-current {
+		display: flex;
+		align-items: flex-start;
+		gap: var(--space-md);
+		padding: var(--space-lg);
+		background: var(--color-bg-tertiary);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+	}
+
+	.update-available {
+		border-color: var(--color-accent-primary);
+		background: var(--color-accent-glow);
+	}
+
+	.update-icon {
+		font-size: 2rem;
+		line-height: 1;
+		flex-shrink: 0;
+	}
+
+	.update-details {
+		flex-grow: 1;
+	}
+
+	.update-details h4 {
+		font-family: var(--font-display);
+		font-size: 1rem;
+		font-weight: 400;
+		margin: 0 0 var(--space-xs);
+		color: var(--color-text-primary);
+	}
+
+	.update-version {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--color-text-muted);
+		margin: 0;
+	}
+
+	.update-notes {
+		font-size: 0.85rem;
+		color: var(--color-text-secondary);
+		margin: var(--space-sm) 0 0;
+		line-height: 1.5;
 	}
 </style>

@@ -630,3 +630,93 @@ export function selectInstruction(id: string | null): void {
 export function toggleSidebar(): void {
 	appState.update((state) => ({ ...state, sidebarCollapsed: !state.sidebarCollapsed }));
 }
+
+// ============================================================================
+// Auto-Update Functions
+// ============================================================================
+
+export interface UpdateInfo {
+	available: boolean;
+	version?: string;
+	currentVersion: string;
+	body?: string;
+	date?: string;
+}
+
+export const updateInfo = writable<UpdateInfo | null>(null);
+export const checkingForUpdate = writable(false);
+export const installingUpdate = writable(false);
+
+export async function checkForUpdates(): Promise<UpdateInfo | null> {
+	checkingForUpdate.set(true);
+	try {
+		const { check } = await import('@tauri-apps/plugin-updater');
+		const { getVersion } = await import('@tauri-apps/api/app');
+
+		const currentVersion = await getVersion();
+		const update = await check();
+
+		if (update) {
+			const info: UpdateInfo = {
+				available: update.available,
+				version: update.version,
+				currentVersion,
+				body: update.body,
+				date: update.date
+			};
+			updateInfo.set(info);
+			return info;
+		} else {
+			const info: UpdateInfo = {
+				available: false,
+				currentVersion
+			};
+			updateInfo.set(info);
+			return info;
+		}
+	} catch (error) {
+		console.error('Failed to check for updates:', error);
+		toasts.error('Failed to check for updates');
+		return null;
+	} finally {
+		checkingForUpdate.set(false);
+	}
+}
+
+export async function installUpdate(): Promise<boolean> {
+	installingUpdate.set(true);
+	try {
+		const { check } = await import('@tauri-apps/plugin-updater');
+		const { relaunch } = await import('@tauri-apps/plugin-process');
+
+		const update = await check();
+
+		if (update?.available) {
+			toasts.info('Downloading update...');
+
+			await update.downloadAndInstall((progress) => {
+				if (progress.event === 'Started') {
+					toasts.info(`Downloading update (${progress.data.contentLength} bytes)`);
+				} else if (progress.event === 'Progress') {
+					const percent = Math.round((progress.data.chunkLength / progress.data.contentLength) * 100);
+					console.log(`Download progress: ${percent}%`);
+				}
+			});
+
+			toasts.success('Update installed! Restarting...');
+
+			// Relaunch the app
+			await relaunch();
+			return true;
+		} else {
+			toasts.info('No update available');
+			return false;
+		}
+	} catch (error) {
+		console.error('Failed to install update:', error);
+		toasts.error('Failed to install update');
+		return false;
+	} finally {
+		installingUpdate.set(false);
+	}
+}

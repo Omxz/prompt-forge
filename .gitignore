@@ -8,3 +8,10 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Tauri signing - NEVER commit private keys!
+*.key
+*.ps1
+
+# Temporary Claude directories
+tmpclaude-*
