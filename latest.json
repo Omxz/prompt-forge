@@ -1,15 +1,15 @@
 {
-  "version": "0.2.0",
-  "notes": "Prompt Forge v0.2.0 - MCP Server UI improvements and usage analytics",
-  "pub_date": "2026-01-13T21:30:00Z",
+  "version": "0.2.1",
+  "notes": "Prompt Forge v0.2.1 - Fix auto-updater permissions",
+  "pub_date": "2026-01-13T21:45:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUdmQyL1BhMTRQaFRzL3QrVHRNYzJiWFhsUUxreHBmZkx2K0J2V1EwYVZZUy9LcXkrUnFkdlhjSjNGd3RxaVZPUXVBYXpGbEQzZFdWd1VadWw1V1dFdFJmTkFqaWxFMVFBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY4MzM5ODAwCWZpbGU6UHJvbXB0IEZvcmdlXzAuMi4wX3g2NC1zZXR1cC5leGUKdzJVYmlYNEVYcmt1SkNhcmtvN3lwdnk5OXZuTmVwd0MyNUVaVkJCNGVEVWFqZE1VaWxsUGVNQWtyNnhGbkJDNmJYK0F5SXMvS0FEK3RRLy9OUFFCRFE9PQo=",
-      "url": "https://github.com/Omxz/prompt-forge/releases/download/v0.2.0/Prompt.Forge_0.2.0_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUdmQyL1BhMTRQaGZqeVJ4blpNUUZyTndzMEtzM0Q3RVM4UDFvbVIyTkpSQ3pJdUE5UXAwWHFiVGRvL3gxRkhtdEZhOWc3b1J2ZTAzalFsVkIwOWUzZ1l5WElxb0pER0FrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY4MzQwNjIyCWZpbGU6UHJvbXB0LkZvcmdlXzAuMi4xX3g2NC1zZXR1cC5leGUKTjNabDRZUHZQeXJGbWsyTmFGeWhNKzBnUm5MN3l5OEw1ZldLem5vNzZyMWd4dklKR0tRSXJ0M1ZoZzg0dTMxS09iK3E2UHNqVlB0N2d6U2FDM0MzQWc9PQo=",
+      "url": "https://github.com/Omxz/prompt-forge/releases/download/v0.2.1/Prompt.Forge_0.2.1_x64-setup.exe"
     },
     "windows-x86_64-msi": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUdmQyL1BhMTRQaFZzbXN2azJTVGoyYjF1NHliZlFOMGxSa3dPSmJnQ25STEtldXlvUGhyc1FMc3NkVHM4RXNkOCtRWjVod0xPSGpaOS91MXcvL0VpOXdVbUltMVUyREF3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY4MzM5Nzk0CWZpbGU6UHJvbXB0IEZvcmdlXzAuMi4wX3g2NF9lbi1VUy5tc2kKR0s1Y3VvRXRpYTJaSjJMMjY5YXVJckJtellWZWc5MUFVN24rYkhLOVVlMVhpRWpzNVNXWlZsbkFXa2hIY0hRcEdYZnpYamg5c3Uramx2ZGxhYkJOQnc9PQo=",
-      "url": "https://github.com/Omxz/prompt-forge/releases/download/v0.2.0/Prompt.Forge_0.2.0_x64_en-US.msi"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUdmQyL1BhMTRQaFhrVThrd0VNK1RwWHlYSnYxdjZvQWs1V1BteXYrNVJGRlpRcGNqT3FFbEQ5UHVaZVpNcENrN0xIMitOK04wOXd3M3hBL3ZvbEpjOXcxUVFDNmprMmdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY4MzQwNjE1CWZpbGU6UHJvbXB0LkZvcmdlXzAuMi4xX3g2NF9lbi1VUy5tc2kKVzRZTloyWmY1eWZnaVFDd2ZjK0ZqWmFVZjNabjlKT1cxcjcvaCsyMlhTdU1VcUcyQUs1S0wvdWtCMDNYMTgyWG1SODNFRDR4YVpBNEUweGsxZk1wQWc9PQo=",
+      "url": "https://github.com/Omxz/prompt-forge/releases/download/v0.2.1/Prompt.Forge_0.2.1_x64_en-US.msi"
     }
   }
 }
