@@ -25,6 +25,8 @@ pub fn create_agent(state: State<'_, AppState>, agent: CreateAgentInput) -> Resu
         tags: agent.tags,
         created_at: Utc::now(),
         updated_at: Utc::now(),
+        usage_count: 0,
+        last_used_at: None,
     };
 
     state
@@ -469,6 +471,12 @@ pub fn apply_agent(state: State<'_, AppState>, agent_name: String) -> Result<Str
             full_prompt.push_str(&format!("\n{}\n", instruction.content));
         }
     }
+
+    // Record agent usage
+    state
+        .db
+        .record_agent_usage(&agent.id)
+        .map_err(|e| format!("Failed to record usage: {}", e))?;
 
     Ok(full_prompt)
 }

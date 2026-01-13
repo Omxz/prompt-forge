@@ -6,6 +6,7 @@
     { id: 'agents', label: 'Agents', icon: '🤖' },
     { id: 'skills', label: 'Skills', icon: '⚡' },
     { id: 'instructions', label: 'Instructions', icon: '📋' },
+    { id: 'mcp', label: 'MCP Server', icon: '🔌' },
     { id: 'settings', label: 'Settings', icon: '⚙️' },
   ];
 
@@ -78,7 +79,7 @@
   <div class="sidebar-footer">
     {#if !$appState.sidebarCollapsed}
       <div class="version-info">
-        <span>Prompt Forge v0.1.0</span>
+        <span>Prompt Forge v0.2.0</span>
       </div>
     {/if}
   </div>

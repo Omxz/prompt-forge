@@ -160,6 +160,23 @@
     const instruction = $instructions.find(i => i.id === instructionId);
     return instruction?.name || instructionId;
   }
+
+  function formatLastUsed(lastUsedAt: string | null): string {
+    if (!lastUsedAt) return 'Never used';
+    const date = new Date(lastUsedAt);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays === 1) return 'Yesterday';
+    if (diffDays < 30) return `${diffDays}d ago`;
+    return date.toLocaleDateString();
+  }
 </script>
 
 <div class="agents-view">
@@ -227,6 +244,11 @@
         <div class="agent-card-meta">
           <span class="meta-item">🎯 {agent.personality.tone}</span>
           <span class="meta-item">📝 {agent.personality.verbosity}</span>
+        </div>
+
+        <div class="agent-card-usage">
+          <span class="usage-stat" title="Times used">📊 {agent.usage_count || 0}</span>
+          <span class="usage-stat usage-last" title="Last used">{formatLastUsed(agent.last_used_at)}</span>
         </div>
       </div>
     {/each}
@@ -617,6 +639,29 @@ You are...`}
     display: flex;
     align-items: center;
     gap: var(--space-xs);
+  }
+
+  .agent-card-usage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .usage-stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+  }
+
+  .usage-last {
+    font-style: italic;
+    opacity: 0.8;
   }
 
   /* Modal Styles */

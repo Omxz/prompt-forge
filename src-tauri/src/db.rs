@@ -26,6 +26,20 @@ impl Database {
     pub fn migrate(&self) -> SqliteResult<()> {
         let conn = self.conn.lock().unwrap();
         conn.execute_batch(include_str!("../migrations/001_initial_schema.sql"))?;
+
+        // Check if usage_count column exists before running migration 002
+        let has_usage_count: bool = conn
+            .prepare("SELECT COUNT(*) FROM pragma_table_info('agents') WHERE name='usage_count'")?
+            .query_row([], |row| {
+                let count: i32 = row.get(0)?;
+                Ok(count > 0)
+            })?;
+
+        // Only run migration if columns don't exist
+        if !has_usage_count {
+            conn.execute_batch(include_str!("../migrations/002_add_usage_tracking.sql"))?;
+        }
+
         Ok(())
     }
 
@@ -44,8 +58,8 @@ impl Database {
         let conn = self.conn.lock().unwrap();
         conn.execute(
             "INSERT INTO agents (id, name, description, avatar_emoji, personality_json,
-             system_prompt, skills_json, instructions_json, tags_json, created_at, updated_at)
-             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)",
+             system_prompt, skills_json, instructions_json, tags_json, created_at, updated_at, usage_count, last_used_at)
+             VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13)",
             params![
                 agent.id,
                 agent.name,
@@ -58,6 +72,8 @@ impl Database {
                 serde_json::to_string(&agent.tags).unwrap(),
                 agent.created_at.to_rfc3339(),
                 agent.updated_at.to_rfc3339(),
+                agent.usage_count,
+                agent.last_used_at.map(|dt| dt.to_rfc3339()),
             ],
         )?;
         Ok(())
@@ -67,7 +83,8 @@ impl Database {
         let conn = self.conn.lock().unwrap();
         let mut stmt = conn.prepare(
             "SELECT id, name, description, avatar_emoji, personality_json, system_prompt,
-             skills_json, instructions_json, tags_json, created_at, updated_at FROM agents",
+             skills_json, instructions_json, tags_json, created_at, updated_at, usage_count, last_used_at FROM agents
+             ORDER BY usage_count DESC",
         )?;
 
         let agents = stmt
@@ -88,6 +105,10 @@ impl Database {
                     updated_at: DateTime::parse_from_rfc3339(&row.get::<_, String>(10)?)
                         .map(|dt| dt.with_timezone(&Utc))
                         .unwrap_or_else(|_| Utc::now()),
+                    usage_count: row.get(11)?,
+                    last_used_at: row.get::<_, Option<String>>(12)?
+                        .and_then(|s| DateTime::parse_from_rfc3339(&s).ok())
+                        .map(|dt| dt.with_timezone(&Utc)),
                 })
             })?
             .collect::<Result<Vec<_>, _>>()?;
@@ -99,7 +120,7 @@ impl Database {
         let conn = self.conn.lock().unwrap();
         let mut stmt = conn.prepare(
             "SELECT id, name, description, avatar_emoji, personality_json, system_prompt,
-             skills_json, instructions_json, tags_json, created_at, updated_at
+             skills_json, instructions_json, tags_json, created_at, updated_at, usage_count, last_used_at
              FROM agents WHERE id = ?1",
         )?;
 
@@ -121,6 +142,10 @@ impl Database {
                 updated_at: DateTime::parse_from_rfc3339(&row.get::<_, String>(10)?)
                     .map(|dt| dt.with_timezone(&Utc))
                     .unwrap_or_else(|_| Utc::now()),
+                usage_count: row.get(11)?,
+                last_used_at: row.get::<_, Option<String>>(12)?
+                    .and_then(|s| DateTime::parse_from_rfc3339(&s).ok())
+                    .map(|dt| dt.with_timezone(&Utc)),
             }))
         } else {
             Ok(None)
@@ -132,7 +157,7 @@ impl Database {
         conn.execute(
             "UPDATE agents SET name = ?2, description = ?3, avatar_emoji = ?4,
              personality_json = ?5, system_prompt = ?6, skills_json = ?7,
-             instructions_json = ?8, tags_json = ?9, updated_at = ?10 WHERE id = ?1",
+             instructions_json = ?8, tags_json = ?9, updated_at = ?10, usage_count = ?11, last_used_at = ?12 WHERE id = ?1",
             params![
                 agent.id,
                 agent.name,
@@ -144,6 +169,8 @@ impl Database {
                 serde_json::to_string(&agent.instructions).unwrap(),
                 serde_json::to_string(&agent.tags).unwrap(),
                 agent.updated_at.to_rfc3339(),
+                agent.usage_count,
+                agent.last_used_at.map(|dt| dt.to_rfc3339()),
             ],
         )?;
         Ok(())
@@ -152,6 +179,15 @@ impl Database {
     pub fn delete_agent(&self, id: &str) -> SqliteResult<()> {
         let conn = self.conn.lock().unwrap();
         conn.execute("DELETE FROM agents WHERE id = ?1", params![id])?;
+        Ok(())
+    }
+
+    pub fn record_agent_usage(&self, id: &str) -> SqliteResult<()> {
+        let conn = self.conn.lock().unwrap();
+        conn.execute(
+            "UPDATE agents SET usage_count = usage_count + 1, last_used_at = ?2 WHERE id = ?1",
+            params![id, Utc::now().to_rfc3339()],
+        )?;
         Ok(())
     }
 
@@ -571,6 +607,8 @@ pub fn create_default_agent() -> Agent {
         tags: vec!["default".to_string()],
         created_at: Utc::now(),
         updated_at: Utc::now(),
+        usage_count: 0,
+        last_used_at: None,
     }
 }
 

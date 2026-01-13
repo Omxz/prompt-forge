@@ -20,6 +20,8 @@ export interface Agent {
   tags: string[];
   created_at: string;
   updated_at: string;
+  usage_count: number;
+  last_used_at: string | null;
 }
 
 export type SkillType = 'prompt' | 'tool' | 'workflow';
@@ -103,7 +105,7 @@ export interface McpStatus {
 }
 
 // View state types
-export type View = 'agents' | 'skills' | 'instructions' | 'settings';
+export type View = 'agents' | 'skills' | 'instructions' | 'settings' | 'mcp';
 
 export interface AppState {
   currentView: View;

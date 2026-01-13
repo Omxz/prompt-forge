@@ -29,6 +29,8 @@ pub struct Agent {
     pub tags: Vec<String>, // For organization/filtering
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
+    pub usage_count: i32,
+    pub last_used_at: Option<DateTime<Utc>>,
 }
 
 impl Default for Agent {
@@ -45,6 +47,8 @@ impl Default for Agent {
             tags: vec![],
             created_at: Utc::now(),
             updated_at: Utc::now(),
+            usage_count: 0,
+            last_used_at: None,
         }
     }
 }

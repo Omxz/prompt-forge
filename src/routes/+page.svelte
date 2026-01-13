@@ -6,6 +6,7 @@
   import AgentsView from '$lib/components/AgentsView.svelte';
   import SkillsView from '$lib/components/SkillsView.svelte';
   import InstructionsView from '$lib/components/InstructionsView.svelte';
+  import MCPView from '$lib/components/MCPView.svelte';
   import SettingsView from '$lib/components/SettingsView.svelte';
 
   let initialized = false;
@@ -34,6 +35,8 @@
         <SkillsView />
       {:else if $appState.currentView === 'instructions'}
         <InstructionsView />
+      {:else if $appState.currentView === 'mcp'}
+        <MCPView />
       {:else if $appState.currentView === 'settings'}
         <SettingsView />
       {/if}
