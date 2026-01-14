@@ -8,21 +8,32 @@ Prompt Forge uses Tauri's built-in updater plugin to provide automatic updates. 
 
 ## Prerequisites
 
-1. **Generate signing keys** (one-time setup):
+### Signing Key Setup
 
+⚠️ **CRITICAL: The signing key should ONLY be generated ONCE and NEVER regenerated unless lost or compromised.**
+
+If you regenerate the key:
+- All existing users will be unable to auto-update (signature mismatch)
+- Users must manually download the new version
+- This breaks the update chain
+
+**Check if key already exists:**
 ```bash
-# Install Tauri CLI globally
-npm install -g @tauri-apps/cli
+ls ~/.tauri/myapp.key
+```
 
-# Generate update signature keys
-tauri signer generate -w ~/.tauri/myapp.key
+**Only if the key does NOT exist**, generate one:
+```bash
+npx tauri signer generate -w ~/.tauri/myapp.key
 ```
 
 This creates two files:
-- Private key: `~/.tauri/myapp.key` (keep this SECRET!)
-- Public key: printed to console (add this to `tauri.conf.json`)
+- Private key: `~/.tauri/myapp.key` (keep this SECRET, back it up securely!)
+- Public key: `~/.tauri/myapp.key.pub`
 
-2. **Update tauri.conf.json**:
+The public key must be added to `tauri.conf.json` under `plugins.updater.pubkey`. This only needs to be done once when first setting up the project.
+
+### Update tauri.conf.json (first-time only)
 
 Replace `UPDATER_PUBLIC_KEY_PLACEHOLDER` in `src-tauri/tauri.conf.json` with your actual public key:
 
@@ -203,8 +214,8 @@ For `latest.json`, use these platform keys:
 ## Quick Reference
 
 ```bash
-# Generate keys (once) - press Enter twice to skip password, or set one
-npx tauri signer generate -w ~/.tauri/myapp.key
+# Check if signing key exists (DO NOT regenerate if it does!)
+ls ~/.tauri/myapp.key
 
 # Build release
 npm run tauri build
