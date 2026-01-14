@@ -1,6 +1,6 @@
 [package]
 name = "prompt-forge"
-version = "0.2.1"
+version = "0.2.2"
 description = "A local workshop for crafting AI agents, skills, and instructions with MCP server"
 authors = ["you"]
 edition = "2021"

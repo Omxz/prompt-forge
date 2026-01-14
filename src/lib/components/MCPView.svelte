@@ -369,15 +369,26 @@
 	}
 
 	.checkbox-label {
-		display: flex;
+		display: flex !important;
 		align-items: center;
-		gap: var(--space-sm);
+		gap: var(--space-md);
 		cursor: pointer;
 		font-size: 0.9rem;
+		font-weight: 400;
+		text-transform: none;
+		letter-spacing: normal;
+		color: var(--color-text-primary);
+		margin-bottom: 0;
 	}
 
 	.checkbox-label input[type='checkbox'] {
 		cursor: pointer;
+		width: auto;
+		flex-shrink: 0;
+	}
+
+	.checkbox-label span {
+		flex: 1;
 	}
 
 	.field-hint {

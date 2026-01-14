@@ -1,15 +1,11 @@
 {
-  "version": "0.2.1",
-  "notes": "Prompt Forge v0.2.1 - Fix auto-updater permissions",
-  "pub_date": "2026-01-13T21:45:00Z",
+  "version": "0.2.2",
+  "notes": "Prompt Forge v0.2.2 - macOS support + UI fixes",
+  "pub_date": "2026-01-14T10:00:00Z",
   "platforms": {
-    "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUdmQyL1BhMTRQaGZqeVJ4blpNUUZyTndzMEtzM0Q3RVM4UDFvbVIyTkpSQ3pJdUE5UXAwWHFiVGRvL3gxRkhtdEZhOWc3b1J2ZTAzalFsVkIwOWUzZ1l5WElxb0pER0FrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY4MzQwNjIyCWZpbGU6UHJvbXB0LkZvcmdlXzAuMi4xX3g2NC1zZXR1cC5leGUKTjNabDRZUHZQeXJGbWsyTmFGeWhNKzBnUm5MN3l5OEw1ZldLem5vNzZyMWd4dklKR0tRSXJ0M1ZoZzg0dTMxS09iK3E2UHNqVlB0N2d6U2FDM0MzQWc9PQo=",
-      "url": "https://github.com/Omxz/prompt-forge/releases/download/v0.2.1/Prompt.Forge_0.2.1_x64-setup.exe"
-    },
-    "windows-x86_64-msi": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUdmQyL1BhMTRQaFhrVThrd0VNK1RwWHlYSnYxdjZvQWs1V1BteXYrNVJGRlpRcGNqT3FFbEQ5UHVaZVpNcENrN0xIMitOK04wOXd3M3hBL3ZvbEpjOXcxUVFDNmprMmdVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY4MzQwNjE1CWZpbGU6UHJvbXB0LkZvcmdlXzAuMi4xX3g2NF9lbi1VUy5tc2kKVzRZTloyWmY1eWZnaVFDd2ZjK0ZqWmFVZjNabjlKT1cxcjcvaCsyMlhTdU1VcUcyQUs1S0wvdWtCMDNYMTgyWG1SODNFRDR4YVpBNEUweGsxZk1wQWc9PQo=",
-      "url": "https://github.com/Omxz/prompt-forge/releases/download/v0.2.1/Prompt.Forge_0.2.1_x64_en-US.msi"
+    "darwin-aarch64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUd0NHbHY4R1dpMXZweGQybmxiTHowaDl6VUJFSGJPU1l4RkI5cExhdFFmWFFNa3dIRjlIUVpOdWY4SmNIS1BPcmxJMHpMNzJpb2xyY1RDVTVCWi9zWTE1eWY3M2FDVHc4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY4Mzc5NTAxCWZpbGU6UHJvbXB0IEZvcmdlXzAuMi4yX2FhcmNoNjQuZG1nCmJPaHg5V1g3OGpqNE40ckdhVWcwbkRyTXhrMW9samprT0hZdm1QVHltUURjZTUrUFB2eTAyTkNDUVM1YStCLzN1Qlk5NSswdktSR3IwUENJS3F1WURRPT0K",
+      "url": "https://github.com/Omxz/prompt-forge/releases/download/v0.2.2/Prompt.Forge_0.2.2_aarch64.dmg"
     }
   }
 }
